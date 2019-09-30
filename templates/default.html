@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/global.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/master.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/auth.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/landscape.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/portrait.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/fire-font.css">
+    <style>
+      *{
+        margin: 0 auto;
+        transition: all .4s ease;
+        font-family: 'Lato', sans-serif;
+      }
+      :root{
+        --theme-color: firebrick;
+        --theme-color-2: darkred;
+      }
+    </style>
+    <title>Fire Hose</title>
+  </head>
+  <body>
+    <div class="auth-div">
+      <div class="form-container">
+        <div class="row">
+          <form method="post" action="{{ url_for('authenticate') }}">
+            <h1>Welcome</h1>
+            <input type="text" name="username" value="" placeholder="username">
+            <input type="password" name="password" value="" placeholder="password">
+            <span class="alert"></span>
+            <div class="buttonHolder">
+              <button type="button" name="connect">Connect</button>
+              <button type="button" name="subscribe">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../static/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/auth.js"></script>
+    <script type="text/javascript" src="../static/js/TweenMax.min.js"></script>
+  </body>
+</html>

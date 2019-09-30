@@ -1,0 +1,25 @@
+@media(orientation: portrait){
+    .tab{
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .tab>img
+    {
+      width: -webkit-fill-available;
+      height: auto;
+    }
+    .toolbar {
+        height: 5vh;
+    }
+    .toolbar>ul li:hover>div
+    {
+      padding-top: 1vh;
+    }
+    .tab #Data span{
+        flex: 1 0 70%;
+        padding: 5vmin 0px;
+    }
+    .tab #Data b>i {
+        font-size: 40vw;
+    }
+}

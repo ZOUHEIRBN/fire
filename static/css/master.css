@@ -1,0 +1,157 @@
+body{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+body>*
+{
+  display:flex;
+}
+.toolbar {
+    width: 100vw;
+    background-color: var(--theme-color-2);
+    z-index: 1;
+}
+.toolbar>ul
+{
+  width: 100%;
+    list-style: none;
+    display: flex;
+    float: left;
+    padding: 0;
+    flex-direction: row-reverse;
+
+}
+.toolbar>ul li
+{
+  position: relative;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  float: right;
+  text-align: center;
+  font-size: 20pt;
+  background-color: var(--theme-color);
+  color: white;
+  border-bottom: 0vh solid var(--theme-color);
+}
+.toolbar>ul li>div
+{
+  margin: auto;
+  padding-top: 0vh;
+  border-right: 1px solid white;
+  width: 100%;
+  overflow: hidden;
+}
+.toolbar>ul li>div>span
+{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.toolbar>ul li>div li
+{
+  display: block;
+  width: 100%;
+  padding: 1vh 0vw;
+  text-align:center;
+}
+.toolbar>ul li>div section {
+    max-height: 0vh;
+    overflow-y: auto;
+}
+.toolbar>ul li:hover>div section {
+    max-height: 25vh;
+}
+.toolbar>ul li:hover, .toolbar>ul li#actual
+{
+  color: var(--theme-color-2);
+  background-color: white;
+}
+.toolbar>ul>li:hover, .toolbar>ul>li#actual
+{
+  border-bottom: 1vh solid var(--theme-color-2);
+}
+
+.toolbar>ul li:hover>div, .toolbar>ul li:hover+li>div
+{
+  border-right: 0px solid white;
+}
+.toolbar>ul li:first-child>div
+{
+  border-right: 0px solid white;
+}
+
+.toolbar>ul>li section {
+    top: 1vh;
+    position: relative;
+}
+.container{
+  background-color: #fffafa;
+  display: flex;
+  width: 100%;
+  height: 90%;
+  flex-wrap: wrap-reverse;
+  flex-direction: column;
+  overflow: hidden;
+}
+.tab{
+  position: relative;
+  display: inline-flex;
+  background-color: white;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+.tab img
+{
+  height: 100%;
+}
+.tab>span
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: xx-large;
+}
+.tab>span b
+{
+    float: right;
+}
+.tab>span b:first-child
+{
+    float: left;
+}
+.tab *
+{
+  flex-direction: column;
+  width: auto;
+  margin: auto;
+  color: black;
+}
+.tab #Data
+{
+    flex-wrap: wrap;
+}
+.tab #Data span
+{
+    text-align: center;
+    transform: scale(1);
+}
+.tab #Data span *
+{
+    color: black;
+}
+.tab #Data span:hover
+{
+    transform: scale(1.1);
+}
+.tab #Data span:hover *
+{
+    color: var(--theme-color-2);
+}
+.tab .param_list{
+    visibility:hidden;
+    display:none;
+}

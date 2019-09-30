@@ -1,0 +1,45 @@
+
+    <nav class="toolbar">
+      <ul>
+        <li>Temperature</li>
+        <li>Video</li>
+        <li>Item 3</li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="tab">
+        <span id="Data">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+      </div>
+      <div class="tab">
+        <img id="Sensor data" src="{{ url_for('graph_feed') }}">
+        <div class="param_list">
+            {% for e in Ptypes %}
+              <li>{{e}}</li>
+            {% endfor %}
+        </div>
+      </div>
+      <div class="tab">
+        <img id="Prediction scores" src="{{ url_for('score_feed') }}">
+        <div class="param_list">
+            {% for e in Ptypes %}
+              <li>{{e}}</li>
+            {% endfor %}
+        </div>
+      </div>
+      <div class="tab">
+        <img id="Camera" src="{{ url_for('video_feed') }}">
+        <div class="param_list">
+            {% for e in Cam %}
+              <li>{{e}}</li>
+            {% endfor %}
+        </div>
+      </div>
+
+    </div>
+    <script type="text/javascript" src="../static/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/push.min.js"></script>
+    <script type="text/javascript" src="../static/js/serviceWorker.min.js"></script>
+    <script type="text/javascript" src="../static/js/video.js"></script>
+    <script type="text/javascript" src="../static/js/data.js"></script>
+
+

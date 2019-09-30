@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>IOT test code.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #ebebeb;}
+.s2 { color: #54b33e;}
+.s3 { color: #ed864a; font-weight: bold;}
+.s4 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+IOT test code.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">random</span>
+<span class="s0">import </span><span class="s1">serial</span>
+<span class="s0">import </span><span class="s1">time</span>
+SKEYS = {<span class="s2">&quot;DHT&quot;</span><span class="s1">: [</span><span class="s2">&quot;Humidity&quot;</span><span class="s3">, </span><span class="s2">&quot;Temperature&quot;</span><span class="s1">]}</span>
+<span class="s0">class </span><span class="s1">Sensor:</span>
+    <span class="s0">def </span><span class="s1">__init__(self</span><span class="s3">, </span><span class="s1">no_port=</span><span class="s2">'0'</span><span class="s3">, </span><span class="s1">sensor_type=</span><span class="s0">None</span><span class="s1">):</span>
+        self._port = no_port
+        __class__._arduino = serial.Serial(<span class="s2">'com15'</span><span class="s3">, </span><span class="s4">9600</span><span class="s1">)</span>
+        time.sleep(<span class="s4">2</span><span class="s1">)</span>
+        self.sensor_data = {}
+        <span class="s0">if not </span><span class="s1">sensor_type:</span>
+            self._sensor_keys = [<span class="s2">&quot;Humidity&quot;</span><span class="s3">, </span><span class="s2">&quot;Temperature&quot;</span><span class="s1">]</span>
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s0">try</span><span class="s1">:</span>
+                self._sensor_keys = SKEYS[sensor_type]
+            <span class="s0">except</span><span class="s1">:</span>
+                self._sensor_keys = [<span class="s2">&quot;Humidity&quot;</span><span class="s3">, </span><span class="s2">&quot;Temperature&quot;</span><span class="s1">]</span>
+
+
+    <span class="s0">def </span><span class="s1">_read_data(self):</span>
+        b = self._arduino.readline()
+        result = b.decode().rstrip()
+        result = str(result)
+        <span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s1">self._sensor_keys:</span>
+            <span class="s0">if </span><span class="s1">result.startswith(k):</span>
+                value = float(result.replace(k + <span class="s2">&quot;: &quot;</span><span class="s3">, </span><span class="s2">''</span><span class="s1">))</span>
+                <span class="s0">if </span><span class="s1">value &gt; -</span><span class="s4">999</span><span class="s1">:</span>
+                    self.sensor_data[k] = value
+
+        time.sleep(<span class="s4">1</span><span class="s1">)</span>
+
+    <span class="s0">def </span><span class="s1">get_data(self):</span>
+        self._read_data()
+        <span class="s0">return </span><span class="s1">self.sensor_data</span>
+
+
+<span class="s0">class </span><span class="s1">HumiditySensor(Sensor):</span>
+    <span class="s0">def </span><span class="s1">__init__(self):</span>
+        Sensor.__init__(self<span class="s3">, </span><span class="s1">sensor_type=</span><span class="s2">&quot;DHT&quot;</span><span class="s1">)</span>
+
+    <span class="s0">def </span><span class="s1">get_data(self):</span>
+        self._read_data()
+        <span class="s0">return </span><span class="s1">self.sensor_data[</span><span class="s2">&quot;Humidity&quot;</span><span class="s1">]</span>
+
+<span class="s0">class </span><span class="s1">TempSensor(Sensor):</span>
+    <span class="s0">def </span><span class="s1">__init__(self):</span>
+        Sensor.__init__(self<span class="s3">, </span><span class="s1">sensor_type=</span><span class="s2">&quot;DHT&quot;</span><span class="s1">)</span>
+
+    <span class="s0">def </span><span class="s1">get_data(self):</span>
+        self._read_data()
+        <span class="s0">return </span><span class="s1">self.sensor_data[</span><span class="s2">&quot;Temperature&quot;</span><span class="s1">]</span>
+
+</pre>
+</body>
+</html>
