@@ -7,7 +7,7 @@ import webbrowser
 
 
 class Server(Flask):
-    def __init__(self, host='127.0.0.1', port=5001, system=None):
+    def __init__(self, host='0.0.0.0', port=5001, system=None):
         super(Server, self).__init__(__name__, template_folder='../templates', static_folder='../static')
         self.RTData = ds.RealTimeData(server=self)
         self.host = host
@@ -21,7 +21,11 @@ class Server(Flask):
 
         self.add_url_rule('/', view_func=self.default_page)
         self.add_url_rule('/auth', view_func=self.authenticate, methods=["POST", "GET"])
-        webbrowser.open('http://'+self.host+':'+str(self.port)+'/')
+        if self.host == '0.0.0.0':
+            webbrowser.open('http://127.0.0.1:'+str(self.port)+'/')
+        else:
+            webbrowser.open('http://'+self.host+':'+str(self.port)+'/')
+
 
     def __del__(self):
         self.RTData.source.__feed__.release()
