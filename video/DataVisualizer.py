@@ -7,7 +7,11 @@ import random
 import os
 from matplotlib.backends.backend_agg import FigureCanvasAgg as Canvas
 from data import DataSource as ds
-from data.models.ImageClassifier import LABELS
+import tensorflow as tf
+if tf.__version__ >= '2.0.0':
+    from data.models.ImageClassifier import LABELS
+else:
+    from data.models.ImageClassifier_legacy import LABELS
 
 DEFAULT_STEP = 5
 PLOT_GRAD = [(0, 1, 0), (.5, .5, 0), (1, 0, 0)]

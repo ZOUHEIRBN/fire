@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import os
 
-from tensorflow.python.keras.backend import set_session, get_session
-from tensorflow.python.keras.models import model_from_json
+from keras.backend import set_session, get_session
+from keras.models import model_from_json
 import tensorflow as tf
 
 
@@ -16,7 +16,7 @@ print(ROOT_DIR)
 json_file = open(os.path.join(ROOT_DIR, 'model.json'), 'r')
 loaded_model_json = json_file.read()
 json_file.close()
-loaded_model = model_from_json(loaded_model_json, custom_objects={'auc': auc})
+loaded_model = model_from_json(loaded_model_json)
 # load weights into new model
 loaded_model.load_weights(os.path.join(ROOT_DIR, 'model.h5'))
 print("Loaded model from disk")

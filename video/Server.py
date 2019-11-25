@@ -51,6 +51,7 @@ class Server(Flask):
         self.add_url_rule('/score_feed', view_func=self.score_feed, methods=["POST", "GET"])
         self.add_url_rule('/notif_feed', view_func=self.notif_feed, methods=["POST", "GET"])
         self.add_url_rule('/realtime_feed', view_func=self.data_feed, methods=["POST", "GET"])
+        self.add_url_rule('/rest_classifier', view_func=self.classify_frame, methods=["POST", "GET"])
         return render_template('visualizer.html', **params)
 
     def authenticate(self):
@@ -147,6 +148,11 @@ class Server(Flask):
     def run(self, **options):
         super(Server, self).run(host=self.host, port=self.port, debug=self.debug)
 
+    def classify_frame(self):
+        if request.method == 'POST':
+            image_bytes = request.form['image_bytes']
+            return image_bytes
+        return "Classification"
 
 if __name__ == '__main__':
     #"""
